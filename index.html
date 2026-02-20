@@ -637,6 +637,96 @@
             line-height: 1;
         }
 
+        .wisdom-god {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--primary-red) 0%, var(--deep-red) 100%);
+            border-radius: var(--radius-md);
+            margin-bottom: 16px;
+        }
+
+        .wisdom-god-emoji {
+            font-size: 3.5rem;
+            margin-bottom: 8px;
+        }
+
+        .wisdom-god-name {
+            color: var(--white);
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .wisdom-god-desc {
+            color: var(--gold-light);
+            font-size: 0.9rem;
+            margin-top: 4px;
+            opacity: 0.9;
+        }
+
+        .wisdom-lucky-time {
+            background: var(--cream);
+            padding: 16px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 16px;
+            border: 2px dashed var(--gold-deep);
+        }
+
+        .wisdom-lucky-title {
+            font-weight: 700;
+            color: var(--primary-red);
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .wisdom-lucky-content {
+            color: var(--text-dark);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .wisdom-dos {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .wisdom-do-item {
+            padding: 16px;
+            border-radius: var(--radius-sm);
+        }
+
+        .wisdom-do-good {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            border: 2px solid #4CAF50;
+        }
+
+        .wisdom-do-bad {
+            background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%);
+            border: 2px solid #F44336;
+        }
+
+        .wisdom-do-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+
+        .wisdom-do-good .wisdom-do-title {
+            color: #2E7D32;
+        }
+
+        .wisdom-do-bad .wisdom-do-title {
+            color: #C62828;
+        }
+
+        .wisdom-do-list {
+            font-size: 0.85rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+        }
+
         #poster-container {
             position: fixed;
             top: 0;
@@ -1125,8 +1215,11 @@
                     <div class="card-corner card-corner-br"></div>
                     <div class="treasury-header">
                         <h2>✨ 每日财神开示</h2>
-                        <p>今日箴言</p>
+                        <p id="wisdom-date"></p>
                     </div>
+                    <div class="wisdom-god" id="wisdom-god"></div>
+                    <div class="wisdom-lucky-time" id="wisdom-lucky-time"></div>
+                    <div class="wisdom-dos" id="wisdom-dos"></div>
                     <div class="daily-wisdom" id="daily-wisdom-text"></div>
                     <button class="btn btn-secondary" style="margin-top: 24px;" onclick="showMenu()">返回</button>
                 </div>
@@ -1167,22 +1260,20 @@
                     emoji: "🏆",
                     gameType: "sorting",
                     gameData: {
-                        instruction: "将下面的物品拖拽到正确的财库分类中，看看你的理财观念如何！",
+                        instruction: "判断下面这些事，哪些是对你求财有利的，哪些是要避开的！",
                         categories: [
-                            { id: "zhengcai", name: "正财", emoji: "💼" },
-                            { id: "chuxu", name: "储蓄", emoji: "🏦" },
-                            { id: "xiaofei", name: "消费", emoji: "🛒" },
-                            { id: "touzi", name: "投资", emoji: "📈" }
+                            { id: "good", name: "要抓住", emoji: "✅" },
+                            { id: "bad", name: "要避开", emoji: "❌" }
                         ],
                         items: [
-                            { emoji: "💻", name: "工资", category: "zhengcai", weight: 3 },
-                            { emoji: "💰", name: "奖金", category: "zhengcai", weight: 3 },
-                            { emoji: "🏠", name: "买房首付", category: "chuxu", weight: 2 },
-                            { emoji: "💎", name: "定期存款", category: "chuxu", weight: 2 },
-                            { emoji: "👕", name: "买衣服", category: "xiaofei", weight: 1 },
-                            { emoji: "🍜", name: "吃饭", category: "xiaofei", weight: 1 },
-                            { emoji: "📚", name: "学习课程", category: "touzi", weight: 2 },
-                            { emoji: "🏆", name: "基金定投", category: "touzi", weight: 2 }
+                            { emoji: "💪", name: "深耕主业", category: "good", weight: 3 },
+                            { emoji: "📚", name: "学习新技能", category: "good", weight: 3 },
+                            { emoji: "🤝", name: "维护人脉", category: "good", weight: 2 },
+                            { emoji: "💰", name: "定期储蓄", category: "good", weight: 2 },
+                            { emoji: "🎲", name: "盲目赌博", category: "bad", weight: 3 },
+                            { emoji: "💸", name: "冲动消费", category: "bad", weight: 2 },
+                            { emoji: "🦢", name: "轻信躺赚", category: "bad", weight: 3 },
+                            { emoji: "😴", name: "偷懒摸鱼", category: "bad", weight: 2 }
                         ]
                     },
                     cards: {
@@ -1263,16 +1354,69 @@
                 }
             ],
             dailyWisdom: [
-                "深耕主业，把一件事做到极致，就是最好的护城河。",
-                "机遇总是留给有准备的人，但也留给敢行动的人。",
-                "人脉的本质是价值交换，先成为别人的贵人。",
-                "能赚钱是本事，能守钱是智慧，能让钱生钱是格局。",
-                "不要等完美了再开始，先开始了再完美。",
-                "真正的稳定，来自于你不可替代的能力。",
-                "慢就是快，稳就是赢，深耕才能厚积薄发。",
-                "成功的秘诀，在于把简单的事情重复做。",
-                "你的时间在哪里，你的成就就在哪里。",
-                "敢闯敢试，但也要给自己留后路。"
+                {
+                    quote: "深耕主业，把一件事做到极致，就是最好的护城河。",
+                    god: { emoji: "🏆", name: "文财神比干", desc: "守正聚财" },
+                    luckyTime: "辰时（7:00-9:00）巳时（9:00-11:00）",
+                    luckyColor: "红色、金色",
+                    luckyDirection: "南方",
+                    dos: ["主动沟通工作", "学习新技能", "整理工位"],
+                    donts: ["拖延症犯", "与人争执", "冲动消费"]
+                },
+                {
+                    quote: "机遇总是留给有准备的人，但也留给敢行动的人。",
+                    god: { emoji: "⚡", name: "武财神关公", desc: "义薄云天" },
+                    luckyTime: "午时（11:00-13:00）申时（15:00-17:00）",
+                    luckyColor: "绿色、蓝色",
+                    luckyDirection: "东方",
+                    dos: ["见重要客户", "谈合作", "做决策"],
+                    donts: ["优柔寡断", "背后说人", "冒险投机"]
+                },
+                {
+                    quote: "人脉的本质是价值交换，先成为别人的贵人。",
+                    god: { emoji: "🤝", name: "文财神范蠡", desc: "聚善成财" },
+                    luckyTime: "未时（13:00-15:00）酉时（17:00-19:00）",
+                    luckyColor: "紫色、白色",
+                    luckyDirection: "东南方",
+                    dos: ["联系老朋友", "帮助他人", "参加聚会"],
+                    donts: ["闭门不出", "吝啬付出", "功利社交"]
+                },
+                {
+                    quote: "能赚钱是本事，能守钱是智慧，能让钱生钱是格局。",
+                    god: { emoji: "📊", name: "武财神赵公明", desc: "招财进宝" },
+                    luckyTime: "戌时（19:00-21:00）亥时（21:00-23:00）",
+                    luckyColor: "黄色、棕色",
+                    luckyDirection: "西方",
+                    dos: ["理财规划", "复盘总结", "储蓄存钱"],
+                    donts: ["铺张浪费", "盲目投资", "借钱给人"]
+                },
+                {
+                    quote: "不要等完美了再开始，先开始了再完美。",
+                    god: { emoji: "🚀", name: "五路财神", desc: "五福临门" },
+                    luckyTime: "卯时（5:00-7:00）辰时（7:00-9:00）",
+                    luckyColor: "橙色、粉色",
+                    luckyDirection: "东北方",
+                    dos: ["早起运动", "制定计划", "开始新项目"],
+                    donts: ["赖床不起", "过度焦虑", "完美主义"]
+                },
+                {
+                    quote: "真正的稳定，来自于你不可替代的能力。",
+                    god: { emoji: "💎", name: "文财神比干", desc: "守正聚财" },
+                    luckyTime: "巳时（9:00-11:00）午时（11:00-13:00）",
+                    luckyColor: "藏青色、金色",
+                    luckyDirection: "南方",
+                    dos: ["打磨技能", "深度工作", "阅读学习"],
+                    donts: ["浅尝辄止", "投机取巧", "荒废时间"]
+                },
+                {
+                    quote: "慢就是快，稳就是赢，深耕才能厚积薄发。",
+                    god: { emoji: "🌱", name: "武财神赵公明", desc: "招财进宝" },
+                    luckyTime: "辰时（7:00-9:00）未时（13:00-15:00）",
+                    luckyColor: "绿色、土黄色",
+                    luckyDirection: "西南方",
+                    dos: ["稳步推进", "积累资源", "打牢基础"],
+                    donts: ["急于求成", "朝三暮四", "半途而废"]
+                }
             ]
         };
 
@@ -1694,8 +1838,43 @@
                 gameData.dailyWisdomIndex = Math.floor(Math.random() * staticData.dailyWisdom.length);
                 saveGameData();
             }
-            const text = staticData.dailyWisdom[gameData.dailyWisdomIndex];
-            document.getElementById('daily-wisdom-text').textContent = text;
+            const wisdom = staticData.dailyWisdom[gameData.dailyWisdomIndex];
+            
+            const dateObj = new Date();
+            const dateStr = `${dateObj.getFullYear()}年${dateObj.getMonth() + 1}月${dateObj.getDate()}日`;
+            document.getElementById('wisdom-date').textContent = dateStr;
+            
+            document.getElementById('wisdom-god').innerHTML = `
+                <div class="wisdom-god-emoji">${wisdom.god.emoji}</div>
+                <div class="wisdom-god-name">${wisdom.god.name}</div>
+                <div class="wisdom-god-desc">${wisdom.god.desc}</div>
+            `;
+            
+            document.getElementById('wisdom-lucky-time').innerHTML = `
+                <div class="wisdom-lucky-title">⏰ 今日吉时</div>
+                <div class="wisdom-lucky-content">
+                    <div>吉时：${wisdom.luckyTime}</div>
+                    <div>幸运色：${wisdom.luckyColor}</div>
+                    <div>财位方向：${wisdom.luckyDirection}</div>
+                </div>
+            `;
+            
+            document.getElementById('wisdom-dos').innerHTML = `
+                <div class="wisdom-do-item wisdom-do-good">
+                    <div class="wisdom-do-title">✅ 今日宜做</div>
+                    <div class="wisdom-do-list">
+                        ${wisdom.dos.map(item => `• ${item}`).join('<br>')}
+                    </div>
+                </div>
+                <div class="wisdom-do-item wisdom-do-bad">
+                    <div class="wisdom-do-title">❌ 今日忌做</div>
+                    <div class="wisdom-do-list">
+                        ${wisdom.donts.map(item => `• ${item}`).join('<br>')}
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('daily-wisdom-text').textContent = wisdom.quote;
             document.getElementById('wisdom-page').classList.remove('hidden');
         }
 
