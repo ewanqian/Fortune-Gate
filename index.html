@@ -1103,6 +1103,34 @@
             color: var(--primary-red);
         }
 
+        .catch-game .score-display {
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-red);
+            margin-bottom: 16px;
+        }
+
+        .catch-game .game-area {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--gold-light) 100%);
+            border-radius: var(--radius-md);
+            position: relative;
+            overflow: hidden;
+            border: 3px dashed var(--gold-deep);
+        }
+
+        .catch-game .catch-target {
+            position: absolute;
+            transition: transform 0.1s;
+            user-select: none;
+        }
+
+        .catch-game .catch-target:hover {
+            transform: scale(1.2);
+        }
+
         @media (max-width: 375px) {
             .title {
                 font-size: 2.2rem;
@@ -1568,6 +1596,115 @@
             let resultType;
             if (percentage >= 0.7) resultType = 'good';
             else if (percentage >= 0.4) resultType = 'warning';
+            else resultType = 'danger';
+            
+            gameData.gameResults[gameData.currentGate] = { score: currentGameState.score, percentage, type: resultType };
+            finishGame();
+        }
+
+        function initCatchGame(gate) {
+            const gameCard = document.getElementById('game-card');
+            const data = gate.gameData;
+            
+            currentGameState = {
+                score: 0,
+                timeLeft: data.duration,
+                isPlaying: false,
+                targetsCaught: 0
+            };
+
+            gameCard.innerHTML = `
+                <div class="catch-game">
+                    <div class="game-instruction">${data.instruction}</div>
+                    <div class="score-display">得分: <span id="catch-score">0</span> | 时间: <span id="catch-time">${data.duration}</span>秒</div>
+                    <div class="game-area" id="catch-area"></div>
+                    <button class="btn btn-primary" id="start-catch-btn" style="margin-top: 16px;" onclick="startCatchGame()">开始游戏 🎮</button>
+                </div>
+            `;
+        }
+
+        function startCatchGame() {
+            if (currentGameState.isPlaying) return;
+            
+            const gate = staticData.gates[gameData.currentGate - 1];
+            const data = gate.gameData;
+            
+            currentGameState.isPlaying = true;
+            currentGameState.score = 0;
+            currentGameState.timeLeft = data.duration;
+            
+            document.getElementById('start-catch-btn').style.display = 'none';
+            document.getElementById('catch-score').textContent = '0';
+            document.getElementById('catch-time').textContent = data.duration;
+            
+            catchGameInterval = setInterval(() => {
+                currentGameState.timeLeft--;
+                document.getElementById('catch-time').textContent = currentGameState.timeLeft;
+                
+                if (currentGameState.timeLeft <= 0) {
+                    clearInterval(catchGameInterval);
+                    endCatchGame();
+                }
+            }, 1000);
+            
+            spawnTarget();
+        }
+
+        function spawnTarget() {
+            if (!currentGameState.isPlaying) return;
+            
+            const gate = staticData.gates[gameData.currentGate - 1];
+            const data = gate.gameData;
+            const area = document.getElementById('catch-area');
+            
+            const isDistractor = Math.random() < 0.25;
+            let target;
+            
+            if (isDistractor) {
+                target = data.distractor;
+            } else {
+                target = data.targets[Math.floor(Math.random() * data.targets.length)];
+            }
+            
+            const targetEl = document.createElement('div');
+            targetEl.className = 'catch-target';
+            targetEl.style.fontSize = '3rem';
+            targetEl.style.cursor = 'pointer';
+            targetEl.style.transition = 'transform 0.1s';
+            targetEl.textContent = target.emoji;
+            targetEl.style.left = `${Math.random() * 70 + 10}%`;
+            targetEl.style.top = `${Math.random() * 70 + 10}%`;
+            
+            targetEl.onclick = () => {
+                targetEl.style.transform = 'scale(1.3)';
+                setTimeout(() => targetEl.remove(), 100);
+                
+                currentGameState.score += target.points;
+                if (target.points > 0) currentGameState.targetsCaught++;
+                
+                document.getElementById('catch-score').textContent = Math.max(0, currentGameState.score);
+            };
+            
+            area.appendChild(targetEl);
+            
+            setTimeout(() => {
+                if (targetEl.parentNode) targetEl.remove();
+            }, 1500);
+            
+            if (currentGameState.isPlaying) {
+                setTimeout(spawnTarget, 500 + Math.random() * 500);
+            }
+        }
+
+        function endCatchGame() {
+            currentGameState.isPlaying = false;
+            const gate = staticData.gates[gameData.currentGate - 1];
+            const maxScore = gate.gameData.duration * 2;
+            
+            const percentage = Math.max(0, currentGameState.score) / maxScore;
+            let resultType;
+            if (percentage >= 0.6) resultType = 'good';
+            else if (percentage >= 0.3) resultType = 'warning';
             else resultType = 'danger';
             
             gameData.gameResults[gameData.currentGate] = { score: currentGameState.score, percentage, type: resultType };
