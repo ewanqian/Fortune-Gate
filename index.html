@@ -1,11 +1,11 @@
-&lt;!DOCTYPE html&gt;
-&lt;html lang="zh-CN"&gt;
-&lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;开财门 | Fortune Gate&lt;/title&gt;
-    &lt;script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"&gt;&lt;/script&gt;
-    &lt;style&gt;
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>开财门 | Fortune Gate</title>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --red: #D92121;
@@ -251,86 +251,86 @@
             color: rgba(255, 255, 255, 0.8);
             margin-top: 15px;
         }
-    &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;div class="container"&gt;
-        &lt;header&gt;
-            &lt;div class="title"&gt;🏮 开财门&lt;/div&gt;
-            &lt;div class="subtitle"&gt;Fortune Gate&lt;/div&gt;
-        &lt;/header&gt;
-        &lt;div class="main-content"&gt;
-            &lt;div id="welcome-page" class="fade-in"&gt;
-                &lt;div class="card"&gt;
-                    &lt;div class="welcome-emoji"&gt;🧧💰🧨&lt;/div&gt;
-                    &lt;div class="welcome-text"&gt;
-                        30秒闯一关，解锁财神真传，&lt;br&gt;
-                        开财门迎好运，今年搞钱一路顺！&lt;br&gt;&lt;br&gt;
-                        这是中国传统正向民俗文化与积极心理学的结合，&lt;br&gt;
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="title">🏮 开财门</div>
+            <div class="subtitle">Fortune Gate</div>
+        </header>
+        <div class="main-content">
+            <div id="welcome-page" class="fade-in">
+                <div class="card">
+                    <div class="welcome-emoji">🧧💰🧨</div>
+                    <div class="welcome-text">
+                        30秒闯一关，解锁财神真传，<br>
+                        开财门迎好运，今年搞钱一路顺！<br><br>
+                        这是中国传统正向民俗文化与积极心理学的结合，<br>
                         不是封建迷信，是搞钱行动指南～
-                    &lt;/div&gt;
-                    &lt;button class="btn btn-primary" onclick="startGame()"&gt;开启第一扇财门 🚪&lt;/button&gt;
-                    &lt;button class="btn btn-secondary" onclick="showMenu()"&gt;看看我的财库 📦&lt;/button&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-            &lt;div id="menu-page" class="hidden"&gt;
-                &lt;div class="card"&gt;
-                    &lt;div class="menu-card"&gt;
-                        &lt;div class="menu-item" onclick="continueGame()"&gt;
-                            &lt;span class="menu-emoji"&gt;🎮&lt;/span&gt;
-                            &lt;span class="menu-text"&gt;继续闯关&lt;/span&gt;
-                        &lt;/div&gt;
-                        &lt;div class="menu-item" onclick="showTreasury()"&gt;
-                            &lt;span class="menu-emoji"&gt;📦&lt;/span&gt;
-                            &lt;span class="menu-text"&gt;我的财库&lt;/span&gt;
-                        &lt;/div&gt;
-                        &lt;div class="menu-item" onclick="showDailyWisdom()"&gt;
-                            &lt;span class="menu-emoji"&gt;✨&lt;/span&gt;
-                            &lt;span class="menu-text"&gt;每日财神开示&lt;/span&gt;
-                        &lt;/div&gt;
-                        &lt;div class="menu-item" onclick="showWelcome()"&gt;
-                            &lt;span class="menu-emoji"&gt;🏠&lt;/span&gt;
-                            &lt;span class="menu-text"&gt;返回首页&lt;/span&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-            &lt;div id="question-page" class="hidden"&gt;
-                &lt;div class="gate-title" id="gate-title"&gt;&lt;/div&gt;
-                &lt;div class="progress-bar"&gt;&lt;div class="progress-fill" id="progress-fill"&gt;&lt;/div&gt;&lt;/div&gt;
-                &lt;div class="card question-card fade-in" id="question-card"&gt;&lt;/div&gt;
-            &lt;/div&gt;
-            &lt;div id="result-page" class="hidden"&gt;
-                &lt;div class="card result-card fade-in" id="result-card"&gt;&lt;/div&gt;
-            &lt;/div&gt;
-            &lt;div id="treasury-page" class="hidden"&gt;
-                &lt;div class="card"&gt;
-                    &lt;h2 style="text-align: center; margin-bottom: 20px; color: var(--red);"&gt;📦 我的财库&lt;/h2&gt;
-                    &lt;div class="treasury-grid" id="treasury-grid"&gt;&lt;/div&gt;
-                    &lt;button class="btn btn-secondary" style="margin-top: 20px;" onclick="showMenu()"&gt;返回&lt;/button&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-            &lt;div id="wisdom-page" class="hidden"&gt;
-                &lt;div class="card"&gt;
-                    &lt;h2 style="text-align: center; margin-bottom: 20px; color: var(--red);"&gt;✨ 每日财神开示&lt;/h2&gt;
-                    &lt;div class="daily-wisdom" id="daily-wisdom-text"&gt;&lt;/div&gt;
-                    &lt;button class="btn btn-secondary" style="margin-top: 20px;" onclick="showMenu()"&gt;返回&lt;/button&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-        &lt;div class="footer"&gt;
-            本内容仅为中国传统正向民俗文化传播与积极心理学引导，&lt;br&gt;
+                    </div>
+                    <button class="btn btn-primary" onclick="startGame()">开启第一扇财门 🚪</button>
+                    <button class="btn btn-secondary" onclick="showMenu()">看看我的财库 📦</button>
+                </div>
+            </div>
+            <div id="menu-page" class="hidden">
+                <div class="card">
+                    <div class="menu-card">
+                        <div class="menu-item" onclick="continueGame()">
+                            <span class="menu-emoji">🎮</span>
+                            <span class="menu-text">继续闯关</span>
+                        </div>
+                        <div class="menu-item" onclick="showTreasury()">
+                            <span class="menu-emoji">📦</span>
+                            <span class="menu-text">我的财库</span>
+                        </div>
+                        <div class="menu-item" onclick="showDailyWisdom()">
+                            <span class="menu-emoji">✨</span>
+                            <span class="menu-text">每日财神开示</span>
+                        </div>
+                        <div class="menu-item" onclick="showWelcome()">
+                            <span class="menu-emoji">🏠</span>
+                            <span class="menu-text">返回首页</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="question-page" class="hidden">
+                <div class="gate-title" id="gate-title"></div>
+                <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+                <div class="card question-card fade-in" id="question-card"></div>
+            </div>
+            <div id="result-page" class="hidden">
+                <div class="card result-card fade-in" id="result-card"></div>
+            </div>
+            <div id="treasury-page" class="hidden">
+                <div class="card">
+                    <h2 style="text-align: center; margin-bottom: 20px; color: var(--red);">📦 我的财库</h2>
+                    <div class="treasury-grid" id="treasury-grid"></div>
+                    <button class="btn btn-secondary" style="margin-top: 20px;" onclick="showMenu()">返回</button>
+                </div>
+            </div>
+            <div id="wisdom-page" class="hidden">
+                <div class="card">
+                    <h2 style="text-align: center; margin-bottom: 20px; color: var(--red);">✨ 每日财神开示</h2>
+                    <div class="daily-wisdom" id="daily-wisdom-text"></div>
+                    <button class="btn btn-secondary" style="margin-top: 20px;" onclick="showMenu()">返回</button>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            本内容仅为中国传统正向民俗文化传播与积极心理学引导，<br>
             不涉及封建迷信与算命预测，所有内容均为正向心理暗示，无任何决策指导意义。
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div id="poster-container" class="hidden"&gt;
-        &lt;div id="poster"&gt;
-            &lt;div class="poster-title"&gt;🏮 开财门&lt;/div&gt;
-            &lt;div class="poster-content" id="poster-content"&gt;&lt;/div&gt;
-            &lt;div class="small-text"&gt;扫码开启你的财门&lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;script&gt;
+        </div>
+    </div>
+    <div id="poster-container" class="hidden">
+        <div id="poster">
+            <div class="poster-title">🏮 开财门</div>
+            <div class="poster-content" id="poster-content"></div>
+            <div class="small-text">扫码开启你的财门</div>
+        </div>
+    </div>
+    <script>
         let gameData = {
             currentGate: 1,
             currentQuestion: 0,
@@ -539,7 +539,7 @@
             localStorage.setItem('fortuneGate', JSON.stringify(gameData));
         }
         function hideAllPages() {
-            document.querySelectorAll('.main-content &gt; div').forEach(el =&gt; el.classList.add('hidden'));
+            document.querySelectorAll('.main-content > div').forEach(el => el.classList.add('hidden'));
         }
         function showWelcome() {
             hideAllPages();
@@ -557,7 +557,7 @@
             showQuestion();
         }
         function continueGame() {
-            if (gameData.currentGate &gt; 4) {
+            if (gameData.currentGate > 4) {
                 showMenu();
                 alert('🎉 恭喜你！四扇财门已经全部打开！去财库看看你的收获吧～');
             } else {
@@ -573,20 +573,20 @@
             const progress = ((gameData.currentGate - 1) * 3 + gameData.currentQuestion) / 12 * 100;
             document.getElementById('progress-fill').style.width = `${progress}%`;
             const question = gate.questions[gameData.currentQuestion];
-            let html = `&lt;div class="question-text"&gt;${question.text}&lt;/div&gt;&lt;div class="options"&gt;`;
-            question.options.forEach(opt =&gt; {
-                html += `&lt;div class="option" onclick="selectOption('${opt.type}')"&gt;${opt.value}. ${opt.text}&lt;/div&gt;`;
+            let html = `<div class="question-text">${question.text}</div><div class="options">`;
+            question.options.forEach(opt => {
+                html += `<div class="option" onclick="selectOption('${opt.type}')">${opt.value}. ${opt.text}</div>`;
             });
-            html += `&lt;/div&gt;`;
+            html += `</div>`;
             card.innerHTML = html;
             page.classList.remove('hidden');
         }
         let selectedType = null;
         function selectOption(type) {
             selectedType = type;
-            document.querySelectorAll('.option').forEach(opt =&gt; opt.classList.remove('selected'));
+            document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
             event.target.classList.add('selected');
-            setTimeout(() =&gt; submitAnswer(), 300);
+            setTimeout(() => submitAnswer(), 300);
         }
         function submitAnswer() {
             if (!gameData.answers[gameData.currentGate]) {
@@ -594,7 +594,7 @@
             }
             gameData.answers[gameData.currentGate].push(selectedType);
             gameData.currentQuestion++;
-            if (gameData.currentQuestion &gt;= 3) {
+            if (gameData.currentQuestion >= 3) {
                 showResult();
             } else {
                 saveGameData();
@@ -605,11 +605,11 @@
             hideAllPages();
             const gate = staticData.gates[gameData.currentGate - 1];
             const answers = gameData.answers[gameData.currentGate];
-            const goodCount = answers.filter(a =&gt; a === 'good').length;
-            const dangerCount = answers.filter(a =&gt; a === 'danger').length;
+            const goodCount = answers.filter(a => a === 'good').length;
+            const dangerCount = answers.filter(a => a === 'danger').length;
             let cardType;
-            if (goodCount &gt;= 2) { cardType = 'good'; }
-            else if (dangerCount &gt;= 2) { cardType = 'danger'; }
+            if (goodCount >= 2) { cardType = 'good'; }
+            else if (dangerCount >= 2) { cardType = 'danger'; }
             else { cardType = 'warning'; }
             const card = gate.cards[cardType];
             if (!gameData.unlockedCards.includes(gameData.currentGate)) {
@@ -618,29 +618,29 @@
             saveGameData();
             const page = document.getElementById('result-page');
             const resultCard = document.getElementById('result-card');
-            let warningsHtml = '&lt;ul class="warnings-list"&gt;';
-            card.warnings.forEach(w =&gt; warningsHtml += `&lt;li&gt;${w}&lt;/li&gt;`);
-            warningsHtml += '&lt;/ul&gt;';
+            let warningsHtml = '<ul class="warnings-list">';
+            card.warnings.forEach(w => warningsHtml += `<li>${w}</li>`);
+            warningsHtml += '</ul>';
             resultCard.innerHTML = `
-                &lt;div class="card-type"&gt;🏆 ${card.type}&lt;/div&gt;
-                &lt;div class="card-title"&gt;${card.title}&lt;/div&gt;
-                &lt;div class="section"&gt;
-                    &lt;div class="section-title"&gt;📜 财神真传&lt;/div&gt;
-                    &lt;div class="section-content" style="white-space: pre-line;"&gt;${card.heart}&lt;/div&gt;
-                &lt;/div&gt;
-                &lt;div class="section"&gt;
-                    &lt;div class="section-title"&gt;⚠️ 避坑提醒&lt;/div&gt;
-                    &lt;div class="section-content"&gt;${warningsHtml}&lt;/div&gt;
-                &lt;/div&gt;
-                &lt;div class="section"&gt;
-                    &lt;div class="section-title"&gt;✅ 新年小任务&lt;/div&gt;
-                    &lt;div class="task-box"&gt;${card.task}&lt;/div&gt;
-                &lt;/div&gt;
-                &lt;div class="nav-buttons"&gt;
-                    &lt;button class="btn btn-secondary" onclick="generatePoster()"&gt;生成海报 📸&lt;/button&gt;
-                    ${gameData.currentGate &lt; 4 ? '&lt;button class="btn btn-primary" onclick="nextGate()"&gt;开启下一扇财门 🚪&lt;/button&gt;' : '&lt;button class="btn btn-primary" onclick="showTreasury()"&gt;查看财库 📦&lt;/button&gt;'}
-                &lt;/div&gt;
-                &lt;button class="btn btn-secondary" onclick="showMenu()" style="margin-top: 10px;"&gt;返回菜单&lt;/button&gt;
+                <div class="card-type">🏆 ${card.type}</div>
+                <div class="card-title">${card.title}</div>
+                <div class="section">
+                    <div class="section-title">📜 财神真传</div>
+                    <div class="section-content" style="white-space: pre-line;">${card.heart}</div>
+                </div>
+                <div class="section">
+                    <div class="section-title">⚠️ 避坑提醒</div>
+                    <div class="section-content">${warningsHtml}</div>
+                </div>
+                <div class="section">
+                    <div class="section-title">✅ 新年小任务</div>
+                    <div class="task-box">${card.task}</div>
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" onclick="generatePoster()">生成海报 📸</button>
+                    ${gameData.currentGate < 4 ? '<button class="btn btn-primary" onclick="nextGate()">开启下一扇财门 🚪</button>' : '<button class="btn btn-primary" onclick="showTreasury()">查看财库 📦</button>'}
+                </div>
+                <button class="btn btn-secondary" onclick="showMenu()" style="margin-top: 10px;">返回菜单</button>
             `;
             page.classList.remove('hidden');
         }
@@ -655,13 +655,13 @@
             const page = document.getElementById('treasury-page');
             const grid = document.getElementById('treasury-grid');
             let html = '';
-            staticData.gates.forEach(gate =&gt; {
+            staticData.gates.forEach(gate => {
                 const unlocked = gameData.unlockedCards.includes(gate.id);
                 html += `
-                    &lt;div class="treasury-item ${unlocked ? '' : 'locked'}" onclick="${unlocked ? `showCardDetail(${gate.id})` : ''}"&gt;
-                        &lt;div class="treasury-emoji"&gt;${unlocked ? gate.emoji : '🔒'}&lt;/div&gt;
-                        &lt;div class="treasury-name"&gt;${gate.name}&lt;/div&gt;
-                    &lt;/div&gt;
+                    <div class="treasury-item ${unlocked ? '' : 'locked'}" onclick="${unlocked ? `showCardDetail(${gate.id})` : ''}">
+                        <div class="treasury-emoji">${unlocked ? gate.emoji : '🔒'}</div>
+                        <div class="treasury-name">${gate.name}</div>
+                    </div>
                 `;
             });
             grid.innerHTML = html;
@@ -688,18 +688,18 @@
         function generatePoster() {
             const gate = staticData.gates[gameData.currentGate - 1];
             const answers = gameData.answers[gameData.currentGate];
-            const goodCount = answers.filter(a =&gt; a === 'good').length;
-            const dangerCount = answers.filter(a =&gt; a === 'danger').length;
-            let cardType = goodCount &gt;= 2 ? 'good' : (dangerCount &gt;= 2 ? 'danger' : 'warning');
+            const goodCount = answers.filter(a => a === 'good').length;
+            const dangerCount = answers.filter(a => a === 'danger').length;
+            let cardType = goodCount >= 2 ? 'good' : (dangerCount >= 2 ? 'danger' : 'warning');
             const card = gate.cards[cardType];
             document.getElementById('poster-content').innerHTML = `
-                &lt;div style="font-weight: bold; font-size: 1.2rem; margin-bottom: 10px; color: #D92121;"&gt;${card.title}&lt;/div&gt;
-                &lt;div style="margin-bottom: 15px; color: #666;"&gt;${card.type}&lt;/div&gt;
-                &lt;div style="line-height: 1.8; font-size: 0.95rem;"&gt;${card.heart}&lt;/div&gt;
+                <div style="font-weight: bold; font-size: 1.2rem; margin-bottom: 10px; color: #D92121;">${card.title}</div>
+                <div style="margin-bottom: 15px; color: #666;">${card.type}</div>
+                <div style="line-height: 1.8; font-size: 0.95rem;">${card.heart}</div>
             `;
             document.getElementById('poster-container').classList.remove('hidden');
-            setTimeout(() =&gt; {
-                html2canvas(document.getElementById('poster')).then(canvas =&gt; {
+            setTimeout(() => {
+                html2canvas(document.getElementById('poster')).then(canvas => {
                     const link = document.createElement('a');
                     link.download = 'fortune-gate.png';
                     link.href = canvas.toDataURL();
@@ -709,6 +709,6 @@
             }, 500);
         }
         loadGameData();
-    &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;
+    </script>
+</body>
+</html>
