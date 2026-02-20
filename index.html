@@ -791,7 +791,8 @@
             color: var(--text-dark);
         }
 
-        #poster-container {
+        #poster-container,
+        #wisdom-poster-container {
             position: fixed;
             top: 0;
             left: 0;
@@ -811,7 +812,8 @@
             to { opacity: 1; }
         }
 
-        #poster {
+        #poster,
+        #wisdom-poster {
             background: linear-gradient(180deg, var(--primary-red) 0%, var(--deep-red) 100%);
             padding: 48px 40px;
             max-width: 380px;
@@ -822,7 +824,8 @@
             position: relative;
         }
 
-        #poster::before {
+        #poster::before,
+        #wisdom-poster::before {
             content: '';
             position: absolute;
             top: 16px;
@@ -834,7 +837,8 @@
             pointer-events: none;
         }
 
-        #poster .poster-title {
+        #poster .poster-title,
+        #wisdom-poster .poster-title {
             color: var(--gold);
             font-size: 2rem;
             font-weight: 900;
@@ -843,7 +847,8 @@
             text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
 
-        #poster .poster-content {
+        #poster .poster-content,
+        #wisdom-poster .poster-content {
             background: var(--white);
             padding: 32px 28px;
             border-radius: var(--radius-md);
