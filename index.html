@@ -1,4 +1,3 @@
-
 &lt;!DOCTYPE html&gt;
 &lt;html lang="zh-CN"&gt;
 &lt;head&gt;
@@ -7,12 +6,7 @@
     &lt;title&gt;开财门 | Fortune Gate&lt;/title&gt;
     &lt;script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"&gt;&lt;/script&gt;
     &lt;style&gt;
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --red: #D92121;
             --gold: #FFD700;
@@ -21,7 +15,6 @@
             --dark-gray: #333333;
             --shadow: rgba(0, 0, 0, 0.15);
         }
-
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             background: linear-gradient(135deg, var(--red) 0%, #B81D1D 100%);
@@ -29,7 +22,6 @@
             color: var(--dark-gray);
             overflow-x: hidden;
         }
-
         .container {
             max-width: 480px;
             margin: 0 auto;
@@ -38,32 +30,22 @@
             display: flex;
             flex-direction: column;
         }
-
         header {
             text-align: center;
             padding: 20px 0;
             color: var(--white);
         }
-
         .title {
             font-size: 2rem;
             font-weight: bold;
             margin-bottom: 5px;
             text-shadow: 2px 2px 4px var(--shadow);
         }
-
         .subtitle {
             font-size: 0.9rem;
             opacity: 0.9;
         }
-
-        .main-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
+        .main-content { flex: 1; display: flex; flex-direction: column; justify-content: center; }
         .card {
             background: var(--white);
             border-radius: 20px;
@@ -71,7 +53,6 @@
             box-shadow: 0 10px 40px var(--shadow);
             margin-bottom: 20px;
         }
-
         .btn {
             display: block;
             width: 100%;
@@ -85,45 +66,22 @@
             text-align: center;
             text-decoration: none;
         }
-
         .btn-primary {
             background: linear-gradient(135deg, var(--gold) 0%, #F5C800 100%);
             color: var(--dark-gray);
             box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
         }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
-        }
-
-        .btn-secondary {
-            background: var(--light-gold);
-            color: var(--dark-gray);
-            margin-top: 10px;
-        }
-
-        .btn-secondary:hover {
-            background: #FFECB3;
-        }
-
-        .question-card {
-            text-align: center;
-        }
-
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5); }
+        .btn-secondary { background: var(--light-gold); color: var(--dark-gray); margin-top: 10px; }
+        .btn-secondary:hover { background: #FFECB3; }
+        .question-card { text-align: center; }
         .question-text {
             font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 25px;
             line-height: 1.6;
         }
-
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
+        .options { display: flex; flex-direction: column; gap: 12px; }
         .option {
             padding: 15px 20px;
             background: var(--light-gold);
@@ -134,17 +92,8 @@
             text-align: left;
             font-size: 1rem;
         }
-
-        .option:hover {
-            border-color: var(--gold);
-            transform: translateX(5px);
-        }
-
-        .option.selected {
-            border-color: var(--red);
-            background: #FFE0E0;
-        }
-
+        .option:hover { border-color: var(--gold); transform: translateX(5px); }
+        .option.selected { border-color: var(--red); background: #FFE0E0; }
         .gate-title {
             text-align: center;
             color: var(--white);
@@ -152,7 +101,6 @@
             font-size: 1.4rem;
             font-weight: bold;
         }
-
         .progress-bar {
             background: rgba(255, 255, 255, 0.3);
             height: 8px;
@@ -160,18 +108,13 @@
             margin-bottom: 20px;
             overflow: hidden;
         }
-
         .progress-fill {
             height: 100%;
             background: var(--gold);
             border-radius: 4px;
             transition: width 0.5s ease;
         }
-
-        .result-card {
-            text-align: center;
-        }
-
+        .result-card { text-align: center; }
         .card-type {
             display: inline-block;
             background: var(--red);
@@ -182,19 +125,13 @@
             font-weight: 600;
             margin-bottom: 20px;
         }
-
         .card-title {
             font-size: 1.8rem;
             font-weight: bold;
             color: var(--red);
             margin-bottom: 20px;
         }
-
-        .section {
-            margin-bottom: 25px;
-            text-align: left;
-        }
-
+        .section { margin-bottom: 25px; text-align: left; }
         .section-title {
             font-weight: 700;
             color: var(--red);
@@ -203,65 +140,31 @@
             align-items: center;
             gap: 8px;
         }
-
-        .section-content {
-            line-height: 1.8;
-            color: var(--dark-gray);
-        }
-
-        .warnings-list {
-            list-style: none;
-            padding: 0;
-        }
-
+        .section-content { line-height: 1.8; color: var(--dark-gray); }
+        .warnings-list { list-style: none; padding: 0; }
         .warnings-list li {
             padding: 8px 0;
             padding-left: 25px;
             position: relative;
             line-height: 1.6;
         }
-
-        .warnings-list li::before {
-            content: "⚠️";
-            position: absolute;
-            left: 0;
-        }
-
+        .warnings-list li::before { content: "⚠️"; position: absolute; left: 0; }
         .task-box {
             background: var(--light-gold);
             padding: 15px;
             border-radius: 10px;
             border-left: 4px solid var(--gold);
         }
-
-        .nav-buttons {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .nav-buttons .btn {
-            flex: 1;
-        }
-
-        .welcome-emoji {
-            font-size: 4rem;
-            margin-bottom: 20px;
-        }
-
+        .nav-buttons { display: flex; gap: 10px; margin-top: 20px; }
+        .nav-buttons .btn { flex: 1; }
+        .welcome-emoji { font-size: 4rem; margin-bottom: 20px; }
         .welcome-text {
             font-size: 1.2rem;
             line-height: 1.8;
             margin-bottom: 30px;
             color: var(--dark-gray);
         }
-
-        .menu-card {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
+        .menu-card { display: flex; flex-direction: column; gap: 15px; }
         .menu-item {
             display: flex;
             align-items: center;
@@ -271,22 +174,9 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-
-        .menu-item:hover {
-            transform: translateX(5px);
-            background: #FFECB3;
-        }
-
-        .menu-emoji {
-            font-size: 2rem;
-            margin-right: 15px;
-        }
-
-        .menu-text {
-            flex: 1;
-            font-weight: 600;
-        }
-
+        .menu-item:hover { transform: translateX(5px); background: #FFECB3; }
+        .menu-emoji { font-size: 2rem; margin-right: 15px; }
+        .menu-text { flex: 1; font-weight: 600; }
         .footer {
             text-align: center;
             padding: 20px;
@@ -295,45 +185,13 @@
             opacity: 0.8;
             line-height: 1.6;
         }
-
-        .hidden {
-            display: none !important;
-        }
-
-        .fade-in {
-            animation: fadeIn 0.5s ease;
-        }
-
+        .hidden { display: none !important; }
+        .fade-in { animation: fadeIn 0.5s ease; }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        .shake {
-            animation: shake 0.5s ease;
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
-        }
-
-        .bounce {
-            animation: bounce 0.6s ease;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        .treasury-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
+        .treasury-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .treasury-item {
             background: var(--light-gold);
             padding: 20px;
@@ -342,26 +200,10 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-
-        .treasury-item:hover {
-            transform: scale(1.05);
-        }
-
-        .treasury-item.locked {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .treasury-emoji {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-
-        .treasury-name {
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
+        .treasury-item:hover { transform: scale(1.05); }
+        .treasury-item.locked { opacity: 0.5; cursor: not-allowed; }
+        .treasury-emoji { font-size: 2.5rem; margin-bottom: 10px; }
+        .treasury-name { font-weight: 600; font-size: 0.9rem; }
         .daily-wisdom {
             font-size: 1.3rem;
             font-style: italic;
@@ -372,7 +214,6 @@
             border-radius: 12px;
             border-left: 4px solid var(--gold);
         }
-
         #poster-container {
             position: fixed;
             top: 0;
@@ -385,7 +226,6 @@
             align-items: center;
             z-index: 1000;
         }
-
         #poster {
             background: linear-gradient(135deg, var(--red) 0%, #B81D1D 100%);
             padding: 40px;
@@ -393,14 +233,12 @@
             width: 90%;
             text-align: center;
         }
-
         #poster .poster-title {
             color: var(--gold);
             font-size: 1.8rem;
             font-weight: bold;
             margin-bottom: 20px;
         }
-
         #poster .poster-content {
             background: var(--white);
             padding: 25px;
@@ -408,7 +246,6 @@
             color: var(--dark-gray);
             line-height: 1.8;
         }
-
         .small-text {
             font-size: 0.85rem;
             color: rgba(255, 255, 255, 0.8);
@@ -422,9 +259,7 @@
             &lt;div class="title"&gt;🏮 开财门&lt;/div&gt;
             &lt;div class="subtitle"&gt;Fortune Gate&lt;/div&gt;
         &lt;/header&gt;
-
         &lt;div class="main-content"&gt;
-            &lt;!-- 欢迎页面 --&gt;
             &lt;div id="welcome-page" class="fade-in"&gt;
                 &lt;div class="card"&gt;
                     &lt;div class="welcome-emoji"&gt;🧧💰🧨&lt;/div&gt;
@@ -438,8 +273,6 @@
                     &lt;button class="btn btn-secondary" onclick="showMenu()"&gt;看看我的财库 📦&lt;/button&gt;
                 &lt;/div&gt;
             &lt;/div&gt;
-
-            &lt;!-- 菜单页面 --&gt;
             &lt;div id="menu-page" class="hidden"&gt;
                 &lt;div class="card"&gt;
                     &lt;div class="menu-card"&gt;
@@ -462,34 +295,21 @@
                     &lt;/div&gt;
                 &lt;/div&gt;
             &lt;/div&gt;
-
-            &lt;!-- 答题页面 --&gt;
             &lt;div id="question-page" class="hidden"&gt;
                 &lt;div class="gate-title" id="gate-title"&gt;&lt;/div&gt;
-                &lt;div class="progress-bar"&gt;
-                    &lt;div class="progress-fill" id="progress-fill"&gt;&lt;/div&gt;
-                &lt;/div&gt;
-                &lt;div class="card question-card fade-in" id="question-card"&gt;
-                &lt;/div&gt;
+                &lt;div class="progress-bar"&gt;&lt;div class="progress-fill" id="progress-fill"&gt;&lt;/div&gt;&lt;/div&gt;
+                &lt;div class="card question-card fade-in" id="question-card"&gt;&lt;/div&gt;
             &lt;/div&gt;
-
-            &lt;!-- 结果卡片页面 --&gt;
             &lt;div id="result-page" class="hidden"&gt;
-                &lt;div class="card result-card fade-in" id="result-card"&gt;
-                &lt;/div&gt;
+                &lt;div class="card result-card fade-in" id="result-card"&gt;&lt;/div&gt;
             &lt;/div&gt;
-
-            &lt;!-- 财库页面 --&gt;
             &lt;div id="treasury-page" class="hidden"&gt;
                 &lt;div class="card"&gt;
                     &lt;h2 style="text-align: center; margin-bottom: 20px; color: var(--red);"&gt;📦 我的财库&lt;/h2&gt;
-                    &lt;div class="treasury-grid" id="treasury-grid"&gt;
-                    &lt;/div&gt;
+                    &lt;div class="treasury-grid" id="treasury-grid"&gt;&lt;/div&gt;
                     &lt;button class="btn btn-secondary" style="margin-top: 20px;" onclick="showMenu()"&gt;返回&lt;/button&gt;
                 &lt;/div&gt;
             &lt;/div&gt;
-
-            &lt;!-- 每日开示页面 --&gt;
             &lt;div id="wisdom-page" class="hidden"&gt;
                 &lt;div class="card"&gt;
                     &lt;h2 style="text-align: center; margin-bottom: 20px; color: var(--red);"&gt;✨ 每日财神开示&lt;/h2&gt;
@@ -498,14 +318,11 @@
                 &lt;/div&gt;
             &lt;/div&gt;
         &lt;/div&gt;
-
         &lt;div class="footer"&gt;
             本内容仅为中国传统正向民俗文化传播与积极心理学引导，&lt;br&gt;
             不涉及封建迷信与算命预测，所有内容均为正向心理暗示，无任何决策指导意义。
         &lt;/div&gt;
     &lt;/div&gt;
-
-    &lt;!-- 海报生成容器 --&gt;
     &lt;div id="poster-container" class="hidden"&gt;
         &lt;div id="poster"&gt;
             &lt;div class="poster-title"&gt;🏮 开财门&lt;/div&gt;
@@ -513,7 +330,6 @@
             &lt;div class="small-text"&gt;扫码开启你的财门&lt;/div&gt;
         &lt;/div&gt;
     &lt;/div&gt;
-
     &lt;script&gt;
         let gameData = {
             currentGate: 1,
@@ -523,7 +339,6 @@
             dailyWisdomDate: null,
             dailyWisdomIndex: null
         };
-
         const staticData = {
             gates: [
                 {
@@ -545,7 +360,7 @@
                         },
                         {
                             id: 2,
-                            text: "面对别人给你画的\"高回报大饼\"，你的第一反应是？",
+                            text: "面对别人给你画的高回报大饼，你的第一反应是？",
                             options: [
                                 { value: "A", text: "先看饼能不能烙熟，算清楚风险和落地性，再决定", type: "good" },
                                 { value: "B", text: "先冲了再说，万一成了呢", type: "warning" },
@@ -555,7 +370,7 @@
                         },
                         {
                             id: 3,
-                            text: "搞钱路上，你觉得最靠谱的\"护城河\"是？",
+                            text: "搞钱路上，你觉得最靠谱的护城河是？",
                             options: [
                                 { value: "A", text: "自己的专业能力和靠谱口碑，走到哪都有饭吃", type: "good" },
                                 { value: "B", text: "认识的人多，人脉广", type: "neutral" },
@@ -565,9 +380,9 @@
                         }
                     ],
                     cards: {
-                        good: { type: "稳扎稳打型", title: "正财开悟卡", heart: "正财，是你靠自己的双手和专业，一分一分赚来的钱，是你财富的压舱石。\n新的一年，你的正财密码就四个字：深耕守正。", warnings: ["不要盲目跟风做不熟悉的副业", "不要不好意思拒绝不合理的工作", "不要相信\"躺赚、高回报\"的鬼话", "定期复盘，你的努力才会被看见"], task: "这个月，打磨一个你的核心专业技能，做一个作品集/成果总结。" },
-                        warning: { type: "潜力待挖型", title: "正财开悟卡", heart: "正财，是你靠自己的双手和专业，一分一分赚来的钱，是你财富的压舱石。\n新的一年，你的正财密码就四个字：深耕守正。", warnings: ["不要盲目跟风做不熟悉的副业", "不要不好意思拒绝不合理的工作", "不要相信\"躺赚、高回报\"的鬼话", "定期复盘，你的努力才会被看见"], task: "这个月，打磨一个你的核心专业技能，做一个作品集/成果总结。" },
-                        danger: { type: "避坑预警型", title: "正财开悟卡", heart: "正财，是你靠自己的双手和专业，一分一分赚来的钱，是你财富的压舱石。\n新的一年，你的正财密码就四个字：深耕守正。", warnings: ["不要盲目跟风做不熟悉的副业", "不要不好意思拒绝不合理的工作", "不要相信\"躺赚、高回报\"的鬼话", "定期复盘，你的努力才会被看见"], task: "这个月，打磨一个你的核心专业技能，做一个作品集/成果总结。" }
+                        good: { type: "稳扎稳打型", title: "正财开悟卡", heart: "正财，是你靠自己的双手和专业，一分一分赚来的钱，是你财富的压舱石。\n新的一年，你的正财密码就四个字：深耕守正。", warnings: ["不要盲目跟风做不熟悉的副业", "不要不好意思拒绝不合理的工作", "不要相信躺赚、高回报的鬼话", "定期复盘，你的努力才会被看见"], task: "这个月，打磨一个你的核心专业技能，做一个作品集/成果总结。" },
+                        warning: { type: "潜力待挖型", title: "正财开悟卡", heart: "正财，是你靠自己的双手和专业，一分一分赚来的钱，是你财富的压舱石。\n新的一年，你的正财密码就四个字：深耕守正。", warnings: ["不要盲目跟风做不熟悉的副业", "不要不好意思拒绝不合理的工作", "不要相信躺赚、高回报的鬼话", "定期复盘，你的努力才会被看见"], task: "这个月，打磨一个你的核心专业技能，做一个作品集/成果总结。" },
+                        danger: { type: "避坑预警型", title: "正财开悟卡", heart: "正财，是你靠自己的双手和专业，一分一分赚来的钱，是你财富的压舱石。\n新的一年，你的正财密码就四个字：深耕守正。", warnings: ["不要盲目跟风做不熟悉的副业", "不要不好意思拒绝不合理的工作", "不要相信躺赚、高回报的鬼话", "定期复盘，你的努力才会被看见"], task: "这个月，打磨一个你的核心专业技能，做一个作品集/成果总结。" }
                     }
                 },
                 {
@@ -589,7 +404,7 @@
                         },
                         {
                             id: 2,
-                            text: "搞钱路上，你觉得\"灵感和创意\"是什么？",
+                            text: "搞钱路上，你觉得灵感和创意是什么？",
                             options: [
                                 { value: "A", text: "是能变现的核心竞争力，要多落地，多尝试", type: "good" },
                                 { value: "B", text: "是没用的空想，不如踏踏实实干活", type: "warning" },
@@ -716,32 +531,24 @@
                 "敢闯敢试，但也要给自己留后路。"
             ]
         };
-
         function loadGameData() {
             const saved = localStorage.getItem('fortuneGate');
-            if (saved) {
-                gameData = { ...gameData, ...JSON.parse(saved) };
-            }
+            if (saved) { gameData = { ...gameData, ...JSON.parse(saved) }; }
         }
-
         function saveGameData() {
             localStorage.setItem('fortuneGate', JSON.stringify(gameData));
         }
-
         function hideAllPages() {
             document.querySelectorAll('.main-content &gt; div').forEach(el =&gt; el.classList.add('hidden'));
         }
-
         function showWelcome() {
             hideAllPages();
             document.getElementById('welcome-page').classList.remove('hidden');
         }
-
         function showMenu() {
             hideAllPages();
             document.getElementById('menu-page').classList.remove('hidden');
         }
-
         function startGame() {
             gameData.currentGate = 1;
             gameData.currentQuestion = 0;
@@ -749,7 +556,6 @@
             saveGameData();
             showQuestion();
         }
-
         function continueGame() {
             if (gameData.currentGate &gt; 4) {
                 showMenu();
@@ -758,22 +564,16 @@
                 showQuestion();
             }
         }
-
         function showQuestion() {
             hideAllPages();
             const page = document.getElementById('question-page');
             const card = document.getElementById('question-card');
             const gate = staticData.gates[gameData.currentGate - 1];
-
             document.getElementById('gate-title').textContent = `${gate.emoji} 第${gameData.currentGate}关：${gate.name}`;
             const progress = ((gameData.currentGate - 1) * 3 + gameData.currentQuestion) / 12 * 100;
             document.getElementById('progress-fill').style.width = `${progress}%`;
-
             const question = gate.questions[gameData.currentQuestion];
-            let html = `
-                &lt;div class="question-text"&gt;${question.text}&lt;/div&gt;
-                &lt;div class="options"&gt;
-            `;
+            let html = `&lt;div class="question-text"&gt;${question.text}&lt;/div&gt;&lt;div class="options"&gt;`;
             question.options.forEach(opt =&gt; {
                 html += `&lt;div class="option" onclick="selectOption('${opt.type}')"&gt;${opt.value}. ${opt.text}&lt;/div&gt;`;
             });
@@ -781,7 +581,6 @@
             card.innerHTML = html;
             page.classList.remove('hidden');
         }
-
         let selectedType = null;
         function selectOption(type) {
             selectedType = type;
@@ -789,13 +588,11 @@
             event.target.classList.add('selected');
             setTimeout(() =&gt; submitAnswer(), 300);
         }
-
         function submitAnswer() {
             if (!gameData.answers[gameData.currentGate]) {
                 gameData.answers[gameData.currentGate] = [];
             }
             gameData.answers[gameData.currentGate].push(selectedType);
-
             gameData.currentQuestion++;
             if (gameData.currentQuestion &gt;= 3) {
                 showResult();
@@ -804,37 +601,26 @@
                 showQuestion();
             }
         }
-
         function showResult() {
             hideAllPages();
             const gate = staticData.gates[gameData.currentGate - 1];
             const answers = gameData.answers[gameData.currentGate];
             const goodCount = answers.filter(a =&gt; a === 'good').length;
             const dangerCount = answers.filter(a =&gt; a === 'danger').length;
-
             let cardType;
-            if (goodCount &gt;= 2) {
-                cardType = 'good';
-            } else if (dangerCount &gt;= 2) {
-                cardType = 'danger';
-            } else {
-                cardType = 'warning';
-            }
-
+            if (goodCount &gt;= 2) { cardType = 'good'; }
+            else if (dangerCount &gt;= 2) { cardType = 'danger'; }
+            else { cardType = 'warning'; }
             const card = gate.cards[cardType];
-
             if (!gameData.unlockedCards.includes(gameData.currentGate)) {
                 gameData.unlockedCards.push(gameData.currentGate);
             }
             saveGameData();
-
             const page = document.getElementById('result-page');
             const resultCard = document.getElementById('result-card');
-
             let warningsHtml = '&lt;ul class="warnings-list"&gt;';
             card.warnings.forEach(w =&gt; warningsHtml += `&lt;li&gt;${w}&lt;/li&gt;`);
             warningsHtml += '&lt;/ul&gt;';
-
             resultCard.innerHTML = `
                 &lt;div class="card-type"&gt;🏆 ${card.type}&lt;/div&gt;
                 &lt;div class="card-title"&gt;${card.title}&lt;/div&gt;
@@ -856,22 +642,18 @@
                 &lt;/div&gt;
                 &lt;button class="btn btn-secondary" onclick="showMenu()" style="margin-top: 10px;"&gt;返回菜单&lt;/button&gt;
             `;
-
             page.classList.remove('hidden');
         }
-
         function nextGate() {
             gameData.currentGate++;
             gameData.currentQuestion = 0;
             saveGameData();
             showQuestion();
         }
-
         function showTreasury() {
             hideAllPages();
             const page = document.getElementById('treasury-page');
             const grid = document.getElementById('treasury-grid');
-
             let html = '';
             staticData.gates.forEach(gate =&gt; {
                 const unlocked = gameData.unlockedCards.includes(gate.id);
@@ -885,14 +667,12 @@
             grid.innerHTML = html;
             page.classList.remove('hidden');
         }
-
         function showCardDetail(gateId) {
             gameData.currentGate = gateId;
             gameData.currentQuestion = 2;
             gameData.answers[gateId] = ['good', 'good', 'good'];
             showResult();
         }
-
         function showDailyWisdom() {
             hideAllPages();
             const today = new Date().toDateString();
@@ -901,12 +681,10 @@
                 gameData.dailyWisdomIndex = Math.floor(Math.random() * staticData.dailyWisdom.length);
                 saveGameData();
             }
-
             const text = staticData.dailyWisdom[gameData.dailyWisdomIndex];
             document.getElementById('daily-wisdom-text').textContent = text;
             document.getElementById('wisdom-page').classList.remove('hidden');
         }
-
         function generatePoster() {
             const gate = staticData.gates[gameData.currentGate - 1];
             const answers = gameData.answers[gameData.currentGate];
@@ -914,14 +692,12 @@
             const dangerCount = answers.filter(a =&gt; a === 'danger').length;
             let cardType = goodCount &gt;= 2 ? 'good' : (dangerCount &gt;= 2 ? 'danger' : 'warning');
             const card = gate.cards[cardType];
-
             document.getElementById('poster-content').innerHTML = `
                 &lt;div style="font-weight: bold; font-size: 1.2rem; margin-bottom: 10px; color: #D92121;"&gt;${card.title}&lt;/div&gt;
                 &lt;div style="margin-bottom: 15px; color: #666;"&gt;${card.type}&lt;/div&gt;
                 &lt;div style="line-height: 1.8; font-size: 0.95rem;"&gt;${card.heart}&lt;/div&gt;
             `;
             document.getElementById('poster-container').classList.remove('hidden');
-
             setTimeout(() =&gt; {
                 html2canvas(document.getElementById('poster')).then(canvas =&gt; {
                     const link = document.createElement('a');
@@ -932,7 +708,6 @@
                 });
             }, 500);
         }
-
         loadGameData();
     &lt;/script&gt;
 &lt;/body&gt;
