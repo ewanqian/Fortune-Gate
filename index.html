@@ -1189,10 +1189,10 @@
                     <div class="card-corner card-corner-br"></div>
                     <div class="welcome-emoji">🧧💰🧨</div>
                     <div class="welcome-text">
-                        4种趣味小游戏，解锁财神真传，<br>
-                        <strong>开财门迎好运，今年搞钱一路顺！</strong><br><br>
-                        这是中国传统正向民俗文化与积极心理学的结合，<br>
-                        不是封建迷信，是搞钱行动指南～
+                        四扇财门，四道机缘，<br>
+                        <strong>开启财运，遇见更好的自己。</strong><br><br>
+                        以传统民俗为引，以积极心理学为核，<br>
+                        这是一份专属于你的新年财富成长指南。
                     </div>
                     <button class="btn btn-primary" onclick="startGame()">开启第一扇财门 🚪</button>
                     <button class="btn btn-secondary" onclick="showMenu()">看看我的财库 📦</button>
@@ -1208,6 +1208,10 @@
                         <div class="menu-item" onclick="continueGame()">
                             <span class="menu-emoji">🎮</span>
                             <span class="menu-text">继续闯关</span>
+                        </div>
+                        <div class="menu-item" onclick="restartGame()">
+                            <span class="menu-emoji">🔄</span>
+                            <span class="menu-text">重新闯关</span>
                         </div>
                         <div class="menu-item" onclick="showTreasury()">
                             <span class="menu-emoji">📦</span>
@@ -1319,8 +1323,10 @@
                         items: [
                             { emoji: "💪", name: "深耕主业", category: "good", weight: 3 },
                             { emoji: "📚", name: "学习新技能", category: "good", weight: 3 },
+                            { emoji: "🤝", name: "维护人脉", category: "good", weight: 2 },
                             { emoji: "🎲", name: "盲目赌博", category: "bad", weight: 3 },
-                            { emoji: "🦢", name: "轻信躺赚", category: "bad", weight: 3 }
+                            { emoji: "🦢", name: "轻信躺赚", category: "bad", weight: 3 },
+                            { emoji: "😴", name: "偷懒摸鱼", category: "bad", weight: 2 }
                         ]
                     },
                     cards: {
@@ -1337,8 +1343,8 @@
                     emoji: "⚡",
                     gameType: "catch",
                     gameData: {
-                        instruction: "15秒内，点击出现的机遇图标！抓住的越多，机遇财越旺！",
-                        duration: 15,
+                        instruction: "20秒内，点击出现的机遇图标！抓住的越多，机遇财越旺！",
+                        duration: 20,
                         targets: [
                             { emoji: "🚀", points: 3, name: "大机遇" },
                             { emoji: "💡", points: 2, name: "灵感" },
@@ -1404,7 +1410,7 @@
                     emoji: "📊",
                     gameType: "allocate",
                     gameData: {
-                        instruction: "如果你有100万元，你会如何分配？拖动滑块看看你的聚财能力！",
+                        instruction: "如果你有100万元，你会如何分配？（参考：储蓄25-45%、投资20-40%、消费10-25%、学习8-15%为最佳）",
                         total: 100,
                         categories: [
                             { id: "saving", name: "储蓄", emoji: "🏦", min: 10, max: 60 },
@@ -1525,6 +1531,16 @@
                 showMenu();
                 alert('🎉 恭喜你！四扇财门已经全部打开！去财库看看你的收获吧～');
             } else {
+                showGame();
+            }
+        }
+
+        function restartGame() {
+            if (confirm('确定要重新开始吗？当前进度会被清空。')) {
+                gameData.currentGate = 1;
+                gameData.gameResults = {};
+                gameData.unlockedCards = [];
+                saveGameData();
                 showGame();
             }
         }
@@ -2094,7 +2110,9 @@
         function showDailyWisdom() {
             hideAllPages();
             const today = new Date().toDateString();
-            if (gameData.dailyWisdomDate !== today) {
+            if (gameData.dailyWisdomDate !== today || 
+                gameData.dailyWisdomIndex === null || 
+                gameData.dailyWisdomIndex >= staticData.dailyWisdom.length) {
                 gameData.dailyWisdomDate = today;
                 gameData.dailyWisdomIndex = Math.floor(Math.random() * staticData.dailyWisdom.length);
                 saveGameData();
@@ -2149,18 +2167,31 @@
                 <div style="line-height: 2; font-size: 1rem; color: #2D1B0E;">${card.heart}</div>
             `;
             document.getElementById('poster-container').classList.remove('hidden');
+            
+            const loadingEl = document.createElement('div');
+            loadingEl.id = 'poster-loading';
+            loadingEl.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.8);color:white;padding:20px 30px;border-radius:12px;font-size:1rem;z-index:100;';
+            loadingEl.textContent = '🎨 正在生成海报...';
+            document.getElementById('poster-container').appendChild(loadingEl);
+            
             setTimeout(() => {
                 html2canvas(document.getElementById('poster'), {
                     scale: 2,
                     useCORS: true,
                     backgroundColor: '#C41E3A'
                 }).then(canvas => {
+                    const loading = document.getElementById('poster-loading');
+                    if (loading) loading.remove();
+                    
                     const link = document.createElement('a');
                     link.download = 'fortune-gate.png';
                     link.href = canvas.toDataURL();
                     link.click();
                     document.getElementById('poster-container').classList.add('hidden');
                 }).catch(err => {
+                    const loading = document.getElementById('poster-loading');
+                    if (loading) loading.remove();
+                    
                     console.error('海报生成失败:', err);
                     document.getElementById('poster-container').classList.add('hidden');
                     alert('海报生成失败，请稍后再试');
