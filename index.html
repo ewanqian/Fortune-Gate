@@ -1131,6 +1131,29 @@
             transform: scale(1.2);
         }
 
+        .choice-game .choice-option {
+            padding: 16px 20px;
+            background: var(--white);
+            border: 2px solid var(--gold-light);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            transition: all 0.2s ease;
+        }
+
+        .choice-game .choice-option:hover {
+            background: linear-gradient(135deg, var(--gold-light) 0%, #FFE0A0 100%);
+            border-color: var(--gold-deep);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(218, 165, 32, 0.2);
+        }
+
+        .choice-game .choice-option:active {
+            transform: translateY(0);
+        }
+
         @media (max-width: 375px) {
             .title {
                 font-size: 2.2rem;
@@ -1337,12 +1360,34 @@
                     god: "文财神范蠡",
                     theme: "遇贵人结善缘，靠人脉赚长久钱",
                     emoji: "🤝",
-                    gameType: "match",
+                    gameType: "choice",
                     gameData: {
-                        instruction: "帮下面的人找到合适的搭档！点击两张卡片进行配对。",
-                        pairs: [
-                            { left: "🐟 卖鱼的", right: "🐟 买鱼的" },
-                            { left: "🏠 卖房的", right: "🏠 买房的" }
+                        instruction: "如果遇到这些人，你会选择和谁做朋友？",
+                        questions: [
+                            {
+                                emoji: "👥",
+                                question: "聚会时遇到两个人，你更愿意和谁聊？",
+                                options: [
+                                    { text: "A. 总是说别人坏话的人", value: "bad" },
+                                    { text: "B. 真心夸你优点的人", value: "good" }
+                                ]
+                            },
+                            {
+                                emoji: "🤝",
+                                question: "朋友找你帮忙，你会怎么做？",
+                                options: [
+                                    { text: "A. 先看对自己有没有好处", value: "bad" },
+                                    { text: "B. 能帮就帮，真心相待", value: "good" }
+                                ]
+                            },
+                            {
+                                emoji: "💰",
+                                question: "和朋友一起赚钱时，你会？",
+                                options: [
+                                    { text: "A. 自己多拿一点", value: "bad" },
+                                    { text: "B. 公平分配，互利共赢", value: "good" }
+                                ]
+                            }
                         ]
                     },
                     cards: {
@@ -1500,6 +1545,9 @@
                     break;
                 case 'match':
                     initMatchGame(gate);
+                    break;
+                case 'choice':
+                    initChoiceGame(gate);
                     break;
                 case 'allocate':
                     initAllocateGame(gate);
@@ -1886,6 +1934,88 @@
             else resultType = 'danger';
             
             gameData.gameResults[gameData.currentGate] = { score, percentage, type: resultType };
+            finishGame();
+        }
+
+        function initChoiceGame(gate) {
+            const gameCard = document.getElementById('game-card');
+            const data = gate.gameData;
+            
+            currentGameState = {
+                questions: data.questions,
+                currentQuestion: 0,
+                score: 0
+            };
+            
+            renderChoiceGame();
+        }
+
+        function renderChoiceGame() {
+            const gate = staticData.gates[gameData.currentGate - 1];
+            const data = gate.gameData;
+            const gameCard = document.getElementById('game-card');
+            
+            if (currentGameState.currentQuestion >= currentGameState.questions.length) {
+                submitChoiceGame();
+                return;
+            }
+            
+            const q = currentGameState.questions[currentGameState.currentQuestion];
+            const progress = currentGameState.currentQuestion / currentGameState.questions.length * 100;
+            
+            let html = `
+                <div class="choice-game">
+                    <div class="game-instruction">
+                        第 ${currentGameState.currentQuestion + 1}/${currentGameState.questions.length} 题<br>${data.instruction}
+                    </div>
+                    <div style="text-align: center; margin: 24px 0;">
+                        <div style="font-size: 4rem; margin-bottom: 12px;">${q.emoji}</div>
+                        <div style="font-size: 1.1rem; font-weight: 600; color: var(--text-dark);">${q.question}</div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        ${q.options.map((opt, idx) => `
+                            <div class="choice-option" onclick="selectChoice(${idx})">
+                                ${opt.text}
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <div style="background: rgba(255,255,255,0.3); height: 6px; border-radius: 3px;">
+                            <div style="background: linear-gradient(90deg, var(--gold-deep), var(--gold)); height: 100%; width: ${progress}%; border-radius: 3px; transition: width 0.3s ease;"></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            gameCard.innerHTML = html;
+        }
+
+        function selectChoice(optionIndex) {
+            const q = currentGameState.questions[currentGameState.currentQuestion];
+            const opt = q.options[optionIndex];
+            
+            if (opt.value === 'good') {
+                currentGameState.score++;
+            }
+            
+            currentGameState.currentQuestion++;
+            setTimeout(renderChoiceGame, 400);
+        }
+
+        function submitChoiceGame() {
+            const gate = staticData.gates[gameData.currentGate - 1];
+            const total = currentGameState.questions.length;
+            const percentage = currentGameState.score / total;
+            
+            let resultType;
+            if (percentage >= 0.7) resultType = 'good';
+            else if (percentage >= 0.4) resultType = 'warning';
+            else resultType = 'danger';
+            
+            gameData.gameResults[gameData.currentGate] = { 
+                score: currentGameState.score, 
+                percentage, 
+                type: resultType 
+            };
             finishGame();
         }
 
