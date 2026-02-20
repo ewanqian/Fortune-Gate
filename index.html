@@ -443,6 +443,70 @@
             color: var(--primary-red);
         }
 
+        .daily-wisdom-card {
+            background: linear-gradient(135deg, var(--cream) 0%, #FFEFD5 100%);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            margin-bottom: 24px;
+            border: 2px solid var(--gold-light);
+        }
+
+        .dw-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .dw-title {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--primary-red);
+        }
+
+        .dw-date {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .dw-god {
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .dw-god-emoji {
+            font-size: 2.5rem;
+        }
+
+        .dw-god-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-top: 4px;
+        }
+
+        .dw-quote {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+            text-align: center;
+            padding: 16px;
+            background: rgba(255, 215, 0, 0.15);
+            border-radius: var(--radius-sm);
+            margin-bottom: 16px;
+        }
+
+        .dw-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-small {
+            flex: 1;
+            padding: 12px 16px;
+            font-size: 0.95rem;
+        }
+
         .menu-card {
             display: flex;
             flex-direction: column;
@@ -1194,6 +1258,20 @@
                         以传统民俗为引，以积极心理学为核，<br>
                         这是一份专属于你的新年财富成长指南。
                     </div>
+                    
+                    <div class="daily-wisdom-card" id="welcome-daily-wisdom">
+                        <div class="dw-header">
+                            <span class="dw-title">✨ 今日财神开示</span>
+                            <span class="dw-date" id="welcome-wisdom-date"></span>
+                        </div>
+                        <div class="dw-god" id="welcome-wisdom-god"></div>
+                        <div class="dw-quote" id="welcome-wisdom-quote"></div>
+                        <div class="dw-actions">
+                            <button class="btn btn-secondary btn-small" onclick="showDailyWisdom()">查看详情</button>
+                            <button class="btn btn-primary btn-small" onclick="generateWisdomPoster()">保存海报 📸</button>
+                        </div>
+                    </div>
+                    
                     <button class="btn btn-primary" onclick="startGame()">开启第一扇财门 🚪</button>
                     <button class="btn btn-secondary" onclick="showMenu()">看看我的财库 📦</button>
                 </div>
@@ -1289,6 +1367,16 @@
         <div id="poster">
             <div class="poster-title">开财门</div>
             <div class="poster-content" id="poster-content"></div>
+            <div style="margin-top: 20px; text-align: center;">
+                <img src="https___ewanqian.github.io_Fortune-Gate_.png" alt="扫码开财门" style="width: 120px; height: 120px; border-radius: 12px; background: white; padding: 8px;">
+                <div class="small-text" style="margin-top: 12px;">🧧 扫码解锁你的财气密码</div>
+            </div>
+        </div>
+    </div>
+    <div id="wisdom-poster-container" class="hidden">
+        <div id="wisdom-poster">
+            <div class="poster-title">每日财神开示</div>
+            <div class="poster-content" id="wisdom-poster-content"></div>
             <div style="margin-top: 20px; text-align: center;">
                 <img src="https___ewanqian.github.io_Fortune-Gate_.png" alt="扫码开财门" style="width: 120px; height: 120px; border-radius: 12px; background: white; padding: 8px;">
                 <div class="small-text" style="margin-top: 12px;">🧧 扫码解锁你的财气密码</div>
@@ -2200,12 +2288,99 @@
         }
 
         loadGameData();
+        
+        function initWelcomeWisdom() {
+            const today = new Date().toDateString();
+            if (gameData.dailyWisdomDate !== today || 
+                gameData.dailyWisdomIndex === null || 
+                gameData.dailyWisdomIndex >= staticData.dailyWisdom.length) {
+                gameData.dailyWisdomDate = today;
+                gameData.dailyWisdomIndex = Math.floor(Math.random() * staticData.dailyWisdom.length);
+                saveGameData();
+            }
+            const wisdom = staticData.dailyWisdom[gameData.dailyWisdomIndex];
+            const dateObj = new Date();
+            const dateStr = `${dateObj.getFullYear()}年${dateObj.getMonth() + 1}月${dateObj.getDate()}日`;
+            
+            document.getElementById('welcome-wisdom-date').textContent = dateStr;
+            document.getElementById('welcome-wisdom-god').innerHTML = `
+                <div class="dw-god-emoji">${wisdom.god.emoji}</div>
+                <div class="dw-god-name">${wisdom.god.name}</div>
+            `;
+            document.getElementById('welcome-wisdom-quote').textContent = wisdom.quote;
+        }
+        
+        initWelcomeWisdom();
 
         document.getElementById('poster-container').addEventListener('click', function(e) {
             if (e.target === this) {
                 this.classList.add('hidden');
             }
         });
+
+        document.getElementById('wisdom-poster-container').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.add('hidden');
+            }
+        });
+
+        function generateWisdomPoster() {
+            const today = new Date().toDateString();
+            if (gameData.dailyWisdomDate !== today || 
+                gameData.dailyWisdomIndex === null || 
+                gameData.dailyWisdomIndex >= staticData.dailyWisdom.length) {
+                gameData.dailyWisdomDate = today;
+                gameData.dailyWisdomIndex = Math.floor(Math.random() * staticData.dailyWisdom.length);
+                saveGameData();
+            }
+            const wisdom = staticData.dailyWisdom[gameData.dailyWisdomIndex];
+            const dateObj = new Date();
+            const dateStr = `${dateObj.getFullYear()}年${dateObj.getMonth() + 1}月${dateObj.getDate()}日`;
+            
+            document.getElementById('wisdom-poster-content').innerHTML = `
+                <div style="font-weight: 700; font-size: 1rem; margin-bottom: 16px; color: #666;">${dateStr}</div>
+                <div style="font-size: 3.5rem; margin-bottom: 12px;">${wisdom.god.emoji}</div>
+                <div style="font-weight: 700; font-size: 1.3rem; margin-bottom: 8px; color: #C41E3A;">${wisdom.god.name}</div>
+                <div style="margin-bottom: 20px; color: #888; font-size: 0.95rem;">${wisdom.god.desc}</div>
+                <div style="line-height: 2; font-size: 1rem; color: #2D1B0E;">${wisdom.quote}</div>
+                <div style="margin-top: 20px; padding-top: 20px; border-top: 1px dashed rgba(0,0,0,0.1);">
+                    <div style="font-size: 0.9rem; color: #888;">⏰ 吉时：${wisdom.luckyTime}</div>
+                    <div style="font-size: 0.9rem; color: #888;">🎨 幸运色：${wisdom.luckyColor}</div>
+                    <div style="font-size: 0.9rem; color: #888;">🧭 财位：${wisdom.luckyDirection}</div>
+                </div>
+            `;
+            document.getElementById('wisdom-poster-container').classList.remove('hidden');
+            
+            const loadingEl = document.createElement('div');
+            loadingEl.id = 'wisdom-poster-loading';
+            loadingEl.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.8);color:white;padding:20px 30px;border-radius:12px;font-size:1rem;z-index:100;';
+            loadingEl.textContent = '🎨 正在生成海报...';
+            document.getElementById('wisdom-poster-container').appendChild(loadingEl);
+            
+            setTimeout(() => {
+                html2canvas(document.getElementById('wisdom-poster'), {
+                    scale: 2,
+                    useCORS: true,
+                    backgroundColor: '#C41E3A'
+                }).then(canvas => {
+                    const loading = document.getElementById('wisdom-poster-loading');
+                    if (loading) loading.remove();
+                    
+                    const link = document.createElement('a');
+                    link.download = 'daily-wisdom.png';
+                    link.href = canvas.toDataURL();
+                    link.click();
+                    document.getElementById('wisdom-poster-container').classList.add('hidden');
+                }).catch(err => {
+                    const loading = document.getElementById('wisdom-poster-loading');
+                    if (loading) loading.remove();
+                    
+                    console.error('海报生成失败:', err);
+                    document.getElementById('wisdom-poster-container').classList.add('hidden');
+                    alert('海报生成失败，请稍后再试');
+                });
+            }, 600);
+        }
     </script>
 </body>
 </html>
