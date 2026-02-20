@@ -812,12 +812,22 @@
             to { opacity: 1; }
         }
 
-        #poster,
-        #wisdom-poster {
+        #poster {
             background: linear-gradient(180deg, var(--primary-red) 0%, var(--deep-red) 100%);
             padding: 48px 40px;
             max-width: 380px;
             width: 90%;
+            text-align: center;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
+            position: relative;
+        }
+        
+        #wisdom-poster {
+            background: linear-gradient(180deg, var(--primary-red) 0%, var(--deep-red) 100%);
+            padding: 32px 24px;
+            max-width: 420px;
+            width: 92%;
             text-align: center;
             border-radius: var(--radius-lg);
             box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
@@ -1521,67 +1531,76 @@
             ],
             dailyWisdom: [
                 {
-                    quote: "深耕主业，把一件事做到极致，就是最好的护城河。",
-                    god: { emoji: "🏆", name: "文财神比干", desc: "守正聚财" },
-                    luckyTime: "辰时（7:00-9:00）巳时（9:00-11:00）",
-                    luckyColor: "红色、金色",
+                    quote: "今天别摸鱼！把那事儿干完，晚上就能安心刷手机了！",
+                    god: { emoji: "🏆", name: "文财神比干", desc: "守正聚财小能手" },
+                    luckyTime: "辰巳两小时（7-11点）",
+                    luckyColor: "红色/金色",
                     luckyDirection: "南方",
-                    dos: ["主动沟通工作", "学习新技能", "整理工位"],
-                    donts: ["拖延症犯", "与人争执", "冲动消费"]
+                    dos: ["写方案/改简历", "学个新技能", "给工位大扫除"],
+                    donts: ["刷短视频停不下来", "跟同事拌嘴", "忍不住买没用的东西"]
                 },
                 {
-                    quote: "机遇总是留给有准备的人，但也留给敢行动的人。",
-                    god: { emoji: "⚡", name: "武财神关公", desc: "义薄云天" },
-                    luckyTime: "午时（11:00-13:00）申时（15:00-17:00）",
-                    luckyColor: "绿色、蓝色",
+                    quote: "别犹豫！想做什么就去做，最差的结果就是从0开始！",
+                    god: { emoji: "⚡", name: "武财神关公", desc: "义薄云天讲义气" },
+                    luckyTime: "午申两小时（11-17点）",
+                    luckyColor: "绿色/蓝色",
                     luckyDirection: "东方",
-                    dos: ["见重要客户", "谈合作", "做决策"],
-                    donts: ["优柔寡断", "背后说人", "冒险投机"]
+                    dos: ["约人吃饭谈事", "勇敢做决定", "主动出击"],
+                    donts: ["纠结到头疼", "背后吐槽别人", "All in 冒险"]
                 },
                 {
-                    quote: "人脉的本质是价值交换，先成为别人的贵人。",
-                    god: { emoji: "🤝", name: "文财神范蠡", desc: "聚善成财" },
-                    luckyTime: "未时（13:00-15:00）酉时（17:00-19:00）",
-                    luckyColor: "紫色、白色",
+                    quote: "人脉不是攒出来的！你厉害，人脉自然就来了！",
+                    god: { emoji: "🤝", name: "文财神范蠡", desc: "聚善成财老好人" },
+                    luckyTime: "未酉两小时（13-19点）",
+                    luckyColor: "紫色/白色",
                     luckyDirection: "东南方",
-                    dos: ["联系老朋友", "帮助他人", "参加聚会"],
-                    donts: ["闭门不出", "吝啬付出", "功利社交"]
+                    dos: ["给朋友发个消息", "能帮就帮一把", "出去社交"],
+                    donts: ["宅一天不出门", "太抠门", "总想占便宜"]
                 },
                 {
-                    quote: "能赚钱是本事，能守钱是智慧，能让钱生钱是格局。",
-                    god: { emoji: "📊", name: "武财神赵公明", desc: "招财进宝" },
-                    luckyTime: "戌时（19:00-21:00）亥时（21:00-23:00）",
-                    luckyColor: "黄色、棕色",
+                    quote: "赚了钱别乱花！存起来，看着余额增长比啥都香！",
+                    god: { emoji: "📊", name: "武财神赵公明", desc: "招财进宝铁公鸡" },
+                    luckyTime: "戌亥两小时（19-23点）",
+                    luckyColor: "黄色/棕色",
                     luckyDirection: "西方",
-                    dos: ["理财规划", "复盘总结", "储蓄存钱"],
-                    donts: ["铺张浪费", "盲目投资", "借钱给人"]
+                    dos: ["看看账户余额", "复盘今天的收支", "转一笔定期"],
+                    donts: ["报复性消费", "听风就是雨乱投资", "借钱给不靠谱的人"]
                 },
                 {
-                    quote: "不要等完美了再开始，先开始了再完美。",
-                    god: { emoji: "🚀", name: "五路财神", desc: "五福临门" },
-                    luckyTime: "卯时（5:00-7:00）辰时（7:00-9:00）",
-                    luckyColor: "橙色、粉色",
+                    quote: "早起半小时，今天就比别人多赚了半天！",
+                    god: { emoji: "🚀", name: "五路财神", desc: "五福临门锦鲤本鲤" },
+                    luckyTime: "卯辰两小时（5-9点）",
+                    luckyColor: "橙色/粉色",
                     luckyDirection: "东北方",
-                    dos: ["早起运动", "制定计划", "开始新项目"],
-                    donts: ["赖床不起", "过度焦虑", "完美主义"]
+                    dos: ["早起运动/看书", "列个今日清单", "开始想了很久的事"],
+                    donts: ["赖床到中午", "焦虑到啥也干不成", "非得完美了才开始"]
                 },
                 {
-                    quote: "真正的稳定，来自于你不可替代的能力。",
-                    god: { emoji: "💎", name: "文财神比干", desc: "守正聚财" },
-                    luckyTime: "巳时（9:00-11:00）午时（11:00-13:00）",
-                    luckyColor: "藏青色、金色",
+                    quote: "别躺平！你今天偷的懒，明天都会变成要还的债！",
+                    god: { emoji: "💎", name: "文财神比干", desc: "守正聚财卷王" },
+                    luckyTime: "巳午两小时（9-13点）",
+                    luckyColor: "藏青色/金色",
                     luckyDirection: "南方",
-                    dos: ["打磨技能", "深度工作", "阅读学习"],
-                    donts: ["浅尝辄止", "投机取巧", "荒废时间"]
+                    dos: ["深度工作4小时", "学个硬技能", "读几页书"],
+                    donts: ["啥都浅尝辄止", "总想走捷径", "浪费时间在没用的事上"]
                 },
                 {
-                    quote: "慢就是快，稳就是赢，深耕才能厚积薄发。",
-                    god: { emoji: "🌱", name: "武财神赵公明", desc: "招财进宝" },
-                    luckyTime: "辰时（7:00-9:00）未时（13:00-15:00）",
-                    luckyColor: "绿色、土黄色",
+                    quote: "别急！慢慢来，比较快，一步一个脚印才稳！",
+                    god: { emoji: "🌱", name: "武财神赵公明", desc: "招财进宝稳得住" },
+                    luckyTime: "辰未两小时（7-15点）",
+                    luckyColor: "绿色/土黄色",
                     luckyDirection: "西南方",
-                    dos: ["稳步推进", "积累资源", "打牢基础"],
-                    donts: ["急于求成", "朝三暮四", "半途而废"]
+                    dos: ["踏踏实实做事", "慢慢积累资源", "打好基础"],
+                    donts: ["想一口吃成胖子", "今天做这个明天做那个", "遇到困难就放弃"]
+                },
+                {
+                    quote: "爱笑的人运气不会太差！今天记得多笑一笑～",
+                    god: { emoji: "😊", name: "五路财神", desc: "五福临门开心果" },
+                    luckyTime: "全天都可以",
+                    luckyColor: "你喜欢的颜色",
+                    luckyDirection: "你想去的方向",
+                    dos: ["夸夸自己", "夸夸别人", "做一件让自己开心的事"],
+                    donts: ["垂头丧气", "抱怨个不停", "跟自己过不去"]
                 }
             ]
         };
@@ -2340,18 +2359,56 @@
             }
             const wisdom = staticData.dailyWisdom[gameData.dailyWisdomIndex];
             const dateObj = new Date();
-            const dateStr = `${dateObj.getFullYear()}年${dateObj.getMonth() + 1}月${dateObj.getDate()}日`;
+            const weekDays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+            const dateStr = `${dateObj.getFullYear()}年${dateObj.getMonth() + 1}月${dateObj.getDate()}日 ${weekDays[dateObj.getDay()]}`;
             
             document.getElementById('wisdom-poster-content').innerHTML = `
-                <div style="font-weight: 700; font-size: 1rem; margin-bottom: 16px; color: #666;">${dateStr}</div>
-                <div style="font-size: 3.5rem; margin-bottom: 12px;">${wisdom.god.emoji}</div>
-                <div style="font-weight: 700; font-size: 1.3rem; margin-bottom: 8px; color: #C41E3A;">${wisdom.god.name}</div>
-                <div style="margin-bottom: 20px; color: #888; font-size: 0.95rem;">${wisdom.god.desc}</div>
-                <div style="line-height: 2; font-size: 1rem; color: #2D1B0E;">${wisdom.quote}</div>
-                <div style="margin-top: 20px; padding-top: 20px; border-top: 1px dashed rgba(0,0,0,0.1);">
-                    <div style="font-size: 0.9rem; color: #888;">⏰ 吉时：${wisdom.luckyTime}</div>
-                    <div style="font-size: 0.9rem; color: #888;">🎨 幸运色：${wisdom.luckyColor}</div>
-                    <div style="font-size: 0.9rem; color: #888;">🧭 财位：${wisdom.luckyDirection}</div>
+                <div style="text-align: center; padding: 8px 0 20px 0;">
+                    <div style="font-size: 0.9rem; color: #888; margin-bottom: 4px;">${dateStr}</div>
+                    <div style="font-size: 1.1rem; font-weight: 800; color: #C41E3A; letter-spacing: 3px;">今日财神开示</div>
+                </div>
+                
+                <div style="display: flex; align-items: center; justify-content: center; gap: 12px; background: linear-gradient(135deg, #FFF5E6 0%, #FFEED6 100%); border-radius: 12px; padding: 16px; margin-bottom: 16px;">
+                    <div style="font-size: 3.5rem;">${wisdom.god.emoji}</div>
+                    <div style="text-align: left;">
+                        <div style="font-weight: 800; font-size: 1.2rem; color: #2D1B0E;">${wisdom.god.name}</div>
+                        <div style="font-size: 0.9rem; color: #C41E3A;">${wisdom.god.desc}</div>
+                    </div>
+                </div>
+                
+                <div style="background: linear-gradient(180deg, #FFF9F0 0%, #FFFFFF 100%); border-left: 4px solid #C41E3A; border-radius: 8px; padding: 16px 16px 16px 14px; margin-bottom: 16px;">
+                    <div style="font-size: 1.1rem; font-weight: 600; line-height: 1.8; color: #2D1B0E;">${wisdom.quote}</div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px;">
+                    <div style="background: #FFF5E6; border-radius: 8px; padding: 12px; text-align: center;">
+                        <div style="font-size: 0.85rem; color: #888; margin-bottom: 4px;">⏰ 吉时</div>
+                        <div style="font-size: 0.95rem; font-weight: 600; color: #2D1B0E;">${wisdom.luckyTime}</div>
+                    </div>
+                    <div style="background: #FFF5E6; border-radius: 8px; padding: 12px; text-align: center;">
+                        <div style="font-size: 0.85rem; color: #888; margin-bottom: 4px;">🎨 幸运色</div>
+                        <div style="font-size: 0.95rem; font-weight: 600; color: #2D1B0E;">${wisdom.luckyColor}</div>
+                    </div>
+                </div>
+                
+                <div style="background: #FFF5E6; border-radius: 8px; padding: 12px; text-align: center; margin-bottom: 16px;">
+                    <div style="font-size: 0.85rem; color: #888; margin-bottom: 4px;">🧭 财位</div>
+                    <div style="font-size: 0.95rem; font-weight: 600; color: #2D1B0E;">${wisdom.luckyDirection}</div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div style="background: #E8F5E9; border-radius: 8px; padding: 12px;">
+                        <div style="font-size: 0.85rem; font-weight: 700; color: #2E7D32; margin-bottom: 8px;">✅ 今日宜做</div>
+                        <div style="font-size: 0.85rem; color: #2D1B0E; line-height: 1.7;">
+                            ${wisdom.dos.map((item, i) => `<div style="margin-bottom: 4px;">• ${item}</div>`).join('')}
+                        </div>
+                    </div>
+                    <div style="background: #FFEBEE; border-radius: 8px; padding: 12px;">
+                        <div style="font-size: 0.85rem; font-weight: 700; color: #C62828; margin-bottom: 8px;">❌ 今日忌做</div>
+                        <div style="font-size: 0.85rem; color: #2D1B0E; line-height: 1.7;">
+                            ${wisdom.donts.map((item, i) => `<div style="margin-bottom: 4px;">• ${item}</div>`).join('')}
+                        </div>
+                    </div>
                 </div>
             `;
             document.getElementById('wisdom-poster-container').classList.remove('hidden');
