@@ -19,7 +19,7 @@ This is **not superstition**, but a **lightweight "wealth mindset training" tool
 ---
 
 ## 🚀 怎么玩（How to Play）
-1.  **即点即玩**：无需注册、无需授权，打开页面直接开始；
+1.  **即点即玩**：无需注册、无需授权，打开页面直接开始；https://ewanqian.github.io/Fortune-Gate/
 2.  **闯四关，开四财门**：每关 3 道题，完成自我认知锚定，解锁对应「财神开悟卡」；
 3.  **获得可落地的行动指南**：每张卡片都有专属的「搞钱心法」「避坑提醒」「新年小任务」，不是空泛的鸡汤；
 4.  **社交分享**：生成专属海报分享给朋友；
